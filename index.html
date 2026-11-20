@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alles over de Champions League</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+            color: white;
+            background-color: navy;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+        }
+
+        header p {
+            margin: 0;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            padding: 12px;
+            background-color: black;
+            box-shadow: 0 2px 6px #0004;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: #00d4ff;
+        }
+
+        .wedstrijden,
+        .populaire-teams {
+            width: calc(100% - 40px);
+            max-width: 760px;
+            margin: 25px auto;
+        }
+
+        h2 {
+            margin: 0 0 15px;
+            padding-bottom: 8px;
+            color: navy;
+            border-bottom: 3px solid navy;
+        }
+
+        .wedstrijden ul,
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .wedstrijden li,
+        .team-kaart {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 105px;
+            text-align: center;
+        }
+
+        .wedstrijden li {
+            padding: 10px;
+            background-color: #f4f6fa;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .wedstrijden li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px #0000802e;
+        }
+
+        .teams {
+            margin-bottom: 5px;
+            color: navy;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .datum {
+            margin-bottom: 6px;
+            color: #555;
+            font-size: 11px;
+        }
+
+        .tijd {
+            padding: 3px 7px;
+            color: white;
+            background-color: navy;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+
+        .team-kaart {
+            padding: 8px;
+            color: white;
+            background: linear-gradient(135deg, navy, #123b78);
+            border: 2px solid navy;
+            border-radius: 10px;
+        }
+
+        .team-kaart:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px #00008040;
+        }
+
+        .team-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 32px;
+            height: 32px;
+            margin-bottom: 4px;
+            color: navy;
+            background-color: white;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .team-naam {
+            margin-bottom: 2px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .team-land {
+            color: #d9eaff;
+            font-size: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .wedstrijden,
+            .populaire-teams {
+                width: calc(100% - 20px);
+            }
+
+            .wedstrijden ul,
+            .team-grid {
+                gap: 8px;
+            }
+
+            .wedstrijden li,
+            .team-kaart {
+                height: 100px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Champions League</h1>
+        <p>Alles over de Champions League</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Wedstrijden</a></li>
+            <li><a href="#">Teams</a></li>
+            <li><a href="#">Statistieken</a></li>
+            <li><a href="#">Over ons</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="wedstrijden">
+            <h2>Komende wedstrijden</h2>
+            <ul id="wedstrijden"></ul>
+        </section>
+
+        <section class="populaire-teams">
+            <h2>Populaire teams</h2>
+            <ul id="teams" class="team-grid"></ul>
+        </section>
+    </main>
+
+    <script>
+        const wedstrijden = [
+            ["Real Madrid - Manchester City", "24 november 2026", "21:00 uur"],
+            ["Barcelona - Bayern München", "25 november 2026", "21:00 uur"],
+            ["PSG - Arsenal", "1 december 2026", "20:45 uur"],
+            ["Liverpool - Inter", "2 december 2026", "21:00 uur"],
+            ["AC Milan - Dortmund", "8 december 2026", "21:00 uur"],
+            ["Ajax - Atlético Madrid", "9 december 2026", "18:45 uur"]
+        ];
+
+        const teams = [
+            ["AJA", "Ajax", "Nederland"],
+            ["RMA", "Real Madrid", "Spanje"],
+            ["BAR", "Barcelona", "Spanje"],
+            ["BAY", "Bayern München", "Duitsland"],
+            ["MCI", "Manchester City", "Engeland"],
+            ["LIV", "Liverpool", "Engeland"]
+        ];
+
+        const wedstrijdenLijst = document.getElementById("wedstrijden");
+        const teamsLijst = document.getElementById("teams");
+
+        wedstrijden.forEach(function(wedstrijd) {
+            wedstrijdenLijst.innerHTML += `
+                <li>
+                    <span class="teams">${wedstrijd[0]}</span>
+                    <span class="datum">${wedstrijd[1]}</span>
+                    <span class="tijd">${wedstrijd[2]}</span>
+                </li>
+            `;
+        });
+
+        teams.forEach(function(team) {
+            teamsLijst.innerHTML += `
+                <li class="team-kaart">
+                    <div class="team-logo">${team[0]}</div>
+                    <span class="team-naam">${team[1]}</span>
+                    <span class="team-land">${team[2]}</span>
+                </li>
+            `;
+        });
+    </script>
+
+</body
