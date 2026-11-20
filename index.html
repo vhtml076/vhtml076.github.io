@@ -100,9 +100,10 @@
             border-radius: 8px;
         }
 
-        .wedstrijden li:hover {
+        .wedstrijden li:hover,
+        .team-kaart:hover {
             transform: translateY(-3px);
-            box-shadow: 0 4px 8px #0000802e;
+            box-shadow: 0 5px 10px #00008040;
         }
 
         .teams {
@@ -134,11 +135,6 @@
             border-radius: 10px;
         }
 
-        .team-kaart:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px #00008040;
-        }
-
         .team-logo {
             display: flex;
             justify-content: center;
@@ -162,6 +158,16 @@
         .team-land {
             color: #d9eaff;
             font-size: 10px;
+        }
+
+        .statistieken {
+            margin-top: 35px;
+        }
+
+        .statistieken b {
+            margin-bottom: 6px;
+            color: #d9eaff;
+            font-size: 11px;
         }
 
         @media (max-width: 600px) {
@@ -192,7 +198,7 @@
     </style>
 </head>
 
-<body>
+<body id="home">
 
     <header>
         <h1>Champions League</h1>
@@ -201,23 +207,49 @@
 
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Wedstrijden</a></li>
-            <li><a href="#">Teams</a></li>
-            <li><a href="#">Statistieken</a></li>
-            <li><a href="#">Over ons</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#wedstrijden">Wedstrijden</a></li>
+            <li><a href="#teams">Teams</a></li>
+            <li><a href="#statistieken">Statistieken</a></li>
+            <li><a href="#over-ons">Over ons</a></li>
         </ul>
     </nav>
 
     <main>
-        <section class="wedstrijden">
+        <section class="wedstrijden" id="wedstrijden">
             <h2>Komende wedstrijden</h2>
-            <ul id="wedstrijden"></ul>
+            <ul id="wedstrijden-lijst"></ul>
         </section>
 
-        <section class="populaire-teams">
+        <section class="populaire-teams" id="teams">
             <h2>Populaire teams</h2>
-            <ul id="teams" class="team-grid"></ul>
+            <ul id="teams-lijst" class="team-grid"></ul>
+        </section>
+
+        <section class="populaire-teams statistieken" id="statistieken">
+            <h2>Statistieken</h2>
+
+            <div class="team-grid">
+                <div class="team-kaart">
+                    <b>Meeste titels</b>
+                    Real Madrid
+                </div>
+
+                <div class="team-kaart">
+                    <b>Meeste doelpunten</b>
+                    Cristiano Ronaldo
+                </div>
+
+                <div class="team-kaart">
+                    <b>Meeste wedstrijden</b>
+                    Iker Casillas
+                </div>
+
+                <div class="team-kaart">
+                    <b>Huidige kampioen</b>
+                    Paris Saint-Germain
+                </div>
+            </div>
         </section>
     </main>
 
@@ -232,7 +264,7 @@
         ];
 
         const teams = [
-            ["NAC", "NAC Breda", "Nederland"],
+            ["NAC", "NAC", "Nederland"],
             ["RMA", "Real Madrid", "Spanje"],
             ["BAR", "Barcelona", "Spanje"],
             ["BAY", "Bayern München", "Duitsland"],
@@ -240,8 +272,11 @@
             ["LIV", "Liverpool", "Engeland"]
         ];
 
-        const wedstrijdenLijst = document.getElementById("wedstrijden");
-        const teamsLijst = document.getElementById("teams");
+        const wedstrijdenLijst =
+            document.getElementById("wedstrijden-lijst");
+
+        const teamsLijst =
+            document.getElementById("teams-lijst");
 
         wedstrijden.forEach(function(wedstrijd) {
             wedstrijdenLijst.innerHTML += `
@@ -264,4 +299,6 @@
         });
     </script>
 
-</body
+</body>
+</html>
+            
