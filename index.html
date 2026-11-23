@@ -23,6 +23,22 @@
             background-color: navy;
         }
 
+        .header-inhoud {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-tekst {
+            text-align: center;
+        }
+
+        .trofee {
+            font-size: 42px;
+            line-height: 1;
+        }
+
         header h1 {
             margin: 0 0 8px;
         }
@@ -175,6 +191,22 @@
         }
 
         @media (max-width: 600px) {
+            .header-inhoud {
+                gap: 10px;
+            }
+
+            .trofee {
+                font-size: 28px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            header p {
+                font-size: 14px;
+            }
+
             .wedstrijden,
             .populaire-teams {
                 width: calc(100% - 20px);
@@ -205,8 +237,16 @@
 <body id="home">
 
     <header>
-        <h1>Champions League</h1>
-        <p>Alles over de Champions League</p>
+        <div class="header-inhoud">
+            <span class="trofee" aria-hidden="true">🏆</span>
+
+            <div class="header-tekst">
+                <h1>Champions League</h1>
+                <p>Alles over de Champions League</p>
+            </div>
+
+            <span class="trofee" aria-hidden="true">🏆</span>
+        </div>
     </header>
 
     <nav>
