@@ -49,13 +49,17 @@
             list-style: none;
         }
 
-        nav a {
+        nav button {
+            padding: 0;
             color: white;
+            background: none;
+            border: none;
+            font: inherit;
             font-weight: bold;
-            text-decoration: none;
+            cursor: pointer;
         }
 
-        nav a:hover {
+        nav button:hover {
             color: #00d4ff;
         }
 
@@ -191,7 +195,7 @@
                 gap: 15px;
             }
 
-            nav a {
+            nav button {
                 font-size: 14px;
             }
         }
@@ -207,11 +211,25 @@
 
     <nav>
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#wedstrijden">Wedstrijden</a></li>
-            <li><a href="#teams">Teams</a></li>
-            <li><a href="#statistieken">Statistieken</a></li>
-            <li><a href="#over-ons">Over ons</a></li>
+            <li>
+                <button type="button">Home</button>
+            </li>
+
+            <li>
+                <button type="button">Wedstrijden</button>
+            </li>
+
+            <li>
+                <button type="button">Teams</button>
+            </li>
+
+            <li>
+                <button type="button">Statistieken</button>
+            </li>
+
+            <li>
+                <button type="button">Over ons</button>
+            </li>
         </ul>
     </nav>
 
@@ -301,4 +319,3 @@
 
 </body>
 </html>
-            
