@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
@@ -6,76 +6,315 @@
 <title>Alles over de Champions League</title>
 
 <style>
+:root{
+  --navy:navy;
+  --blue:#123b78;
+  --light:#f4f6fa;
+  --gold:#ffd700
+}
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial,sans-serif;background:#fff}
-header{padding:20px;text-align:center;color:#fff;background:navy}
-.header-inhoud{display:flex;justify-content:center;align-items:center;gap:20px}
+body{margin:0;font-family:Arial,sans-serif}
+
+header{
+  padding:20px;
+  text-align:center;
+  color:#fff;
+  background:var(--navy)
+}
+
+.header-inhoud{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px
+}
+
 .trofee{font-size:42px;line-height:1}
 header h1{margin:0 0 8px}
 header p{margin:0}
-nav{position:sticky;top:0;z-index:1;padding:12px;background:#000;box-shadow:0 2px 6px #0004}
-nav ul{display:flex;justify-content:center;gap:30px;margin:0;padding:0;list-style:none}
-nav button{padding:0;color:#fff;background:none;border:0;font:inherit;font-weight:bold;cursor:pointer}
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:1;
+  padding:12px;
+  background:#000;
+  box-shadow:0 2px 6px #0004
+}
+
+nav ul{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  margin:0;
+  padding:0;
+  list-style:none
+}
+
+nav button{
+  padding:0;
+  color:#fff;
+  background:none;
+  border:0;
+  font:inherit;
+  font-weight:bold;
+  cursor:pointer
+}
+
 nav button:hover{color:#00d4ff}
 
-.wedstrijden,.populaire-teams,.over-ons{
-  width:calc(100% - 40px);max-width:760px;margin:25px auto
+section{
+  width:calc(100% - 40px);
+  max-width:760px;
+  margin:25px auto
 }
-h2{margin:0 0 15px;padding-bottom:8px;color:navy;border-bottom:3px solid navy}
-.wedstrijden ul,.team-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:10px;
-  margin:0;padding:0;list-style:none
+
+h2{
+  margin:0 0 15px;
+  padding-bottom:8px;
+  color:var(--navy);
+  border-bottom:3px solid var(--navy)
 }
-.wedstrijden li,.team-kaart{
-  display:flex;flex-direction:column;justify-content:center;align-items:center;
-  height:105px;text-align:center
+
+.wedstrijden ul,
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin:0;
+  padding:0;
+  list-style:none
 }
-.wedstrijden li{
-  padding:10px;background:#f4f6fa;border:2px solid #ccc;border-radius:8px
-}
-.wedstrijden li:hover,.team-kaart:hover{
-  transform:translateY(-3px);box-shadow:0 5px 10px #00008040
-}
-.teams{margin-bottom:5px;color:navy;font-size:13px;font-weight:bold}
-.datum{margin-bottom:6px;color:#555;font-size:11px}
-.tijd{padding:3px 7px;color:#fff;background:navy;border-radius:4px;font-size:11px}
+
+.wedstrijden li,
 .team-kaart{
-  padding:8px;color:#fff;background:linear-gradient(135deg,navy,#123b78);
-  border:2px solid navy;border-radius:10px
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:105px;
+  text-align:center
 }
+
+.wedstrijden li{
+  padding:10px;
+  background:var(--light);
+  border:2px solid #ccc;
+  border-radius:8px
+}
+
+.team-kaart{
+  padding:8px;
+  color:#fff;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  border:2px solid var(--navy);
+  border-radius:10px
+}
+
+.wedstrijden li:hover,
+.team-kaart:hover{
+  transform:translateY(-3px);
+  box-shadow:0 5px 10px #00008040
+}
+
+.teams{
+  margin-bottom:5px;
+  color:var(--navy);
+  font-size:13px;
+  font-weight:bold
+}
+
+.datum{
+  margin-bottom:6px;
+  color:#555;
+  font-size:11px
+}
+
+.tijd{
+  padding:3px 7px;
+  color:#fff;
+  background:var(--navy);
+  border-radius:4px;
+  font-size:11px
+}
+
 .team-logo{
-  display:flex;justify-content:center;align-items:center;width:32px;height:32px;
-  margin-bottom:4px;color:navy;background:#fff;border-radius:50%;
-  font-size:10px;font-weight:bold
+  display:grid;
+  place-items:center;
+  width:32px;
+  height:32px;
+  margin-bottom:4px;
+  color:var(--navy);
+  background:#fff;
+  border-radius:50%;
+  font-size:10px;
+  font-weight:bold
 }
-.team-naam{margin-bottom:2px;font-size:13px;font-weight:bold}
-.team-land{color:#d9eaff;font-size:10px}
+
+.team-naam{
+  margin-bottom:2px;
+  font-size:13px;
+  font-weight:bold
+}
+
+.team-land{
+  color:#d9eaff;
+  font-size:10px
+}
+
 .statistieken{margin-top:35px}
-.statistieken b{margin-bottom:6px;color:#d9eaff;font-size:11px}
-.over-ons{
-  margin-top:35px;margin-bottom:25px;padding:20px;background:#f4f6fa;
-  border:2px solid #ccc;border-radius:10px
+
+.statistieken b{
+  margin-bottom:6px;
+  color:#d9eaff;
+  font-size:11px
 }
-.over-ons p{margin:0;color:#333;line-height:1.6}
-.over-ons h3{margin:25px 0 12px;color:navy}
-.contactgegevens p{margin:10px 0;color:#333}
+
+/* Nog iets groter gedeelte voor Mooie goals */
+.mooie-goals{
+  position:relative;
+  overflow:hidden;
+  min-height:285px;
+  margin-top:35px;
+  padding:48px 38px;
+  text-align:center;
+  color:#fff;
+  background:linear-gradient(135deg,#06152f,var(--blue));
+  border:2px solid #00d4ff;
+  border-radius:14px;
+  box-shadow:0 5px 12px #0003
+}
+
+.mooie-goals:before,
+.mooie-goals:after{
+  position:absolute;
+  pointer-events:none
+}
+
+.mooie-goals:before{
+  content:"⚽";
+  top:-15px;
+  left:18px;
+  color:#ffffff22;
+  font-size:85px;
+  transform:rotate(-20deg)
+}
+
+.mooie-goals:after{
+  content:"✦";
+  right:25px;
+  bottom:-25px;
+  color:#ffd70055;
+  font-size:110px;
+  transform:rotate(15deg)
+}
+
+.mooie-goals h3,
+.mooie-goals p,
+.goal-link{
+  position:relative;
+  z-index:1
+}
+
+.mooie-goals h3{
+  margin:0 0 18px;
+  color:var(--gold);
+  font-size:32px
+}
+
+.mooie-goals p{
+  max-width:640px;
+  margin:0 auto 28px;
+  color:#eaf6ff;
+  font-size:18px;
+  line-height:1.6
+}
+
+.goal-link{
+  display:inline-block;
+  padding:15px 29px;
+  color:var(--navy);
+  background:var(--gold);
+  border-radius:25px;
+  font-size:17px;
+  font-weight:bold;
+  text-decoration:none;
+  transition:.2s
+}
+
+.goal-link:hover{
+  color:#fff;
+  background:#00a9cc;
+  transform:scale(1.05)
+}
+
+.over-ons{
+  margin-top:35px;
+  margin-bottom:25px;
+  padding:20px;
+  background:var(--light);
+  border:2px solid #ccc;
+  border-radius:10px
+}
+
+.over-ons p{
+  margin:0;
+  color:#333;
+  line-height:1.6
+}
+
+.over-ons h3{
+  margin:25px 0 12px;
+  color:var(--navy)
+}
+
+.contactgegevens p{margin:10px 0}
 
 @media(max-width:600px){
   .header-inhoud{gap:10px}
   .trofee{font-size:28px}
   header h1{font-size:24px}
   header p{font-size:14px}
-  .wedstrijden,.populaire-teams,.over-ons{width:calc(100% - 20px)}
-  .wedstrijden ul,.team-grid{gap:8px}
-  .wedstrijden li,.team-kaart{height:100px}
-  nav ul{flex-wrap:wrap;gap:15px}
+
+  section{width:calc(100% - 20px)}
+
+  .wedstrijden ul,
+  .team-grid{gap:8px}
+
+  .wedstrijden li,
+  .team-kaart{height:100px}
+
+  nav ul{
+    flex-wrap:wrap;
+    gap:15px
+  }
+
   nav button{font-size:14px}
+
+  .mooie-goals{
+    min-height:245px;
+    padding:34px 20px
+  }
+
+  .mooie-goals h3{
+    font-size:26px
+  }
+
+  .mooie-goals p{
+    font-size:16px
+  }
+
+  .goal-link{
+    padding:13px 22px;
+    font-size:15px
+  }
 }
 </style>
 </head>
 
-<body id="home">
+<body>
 
 <header>
   <div class="header-inhoud">
@@ -94,6 +333,7 @@ h2{margin:0 0 15px;padding-bottom:8px;color:navy;border-bottom:3px solid navy}
     <li><button>Wedstrijden</button></li>
     <li><button>Teams</button></li>
     <li><button>Statistieken</button></li>
+    <li><button>Goals</button></li>
     <li><button>Over ons</button></li>
   </ul>
 </nav>
@@ -111,16 +351,51 @@ h2{margin:0 0 15px;padding-bottom:8px;color:navy;border-bottom:3px solid navy}
 
   <section class="populaire-teams statistieken" id="statistieken">
     <h2>Statistieken</h2>
+
     <div class="team-grid">
-      <div class="team-kaart"><b>Meeste titels</b>Real Madrid</div>
-      <div class="team-kaart"><b>Meeste doelpunten</b>Cristiano Ronaldo</div>
-      <div class="team-kaart"><b>Meeste wedstrijden</b>Iker Casillas</div>
-      <div class="team-kaart"><b>Huidige kampioen</b>Paris Saint-Germain</div>
+      <div class="team-kaart">
+        <b>Meeste titels</b>
+        Real Madrid
+      </div>
+
+      <div class="team-kaart">
+        <b>Meeste doelpunten</b>
+        Cristiano Ronaldo
+      </div>
+
+      <div class="team-kaart">
+        <b>Meeste wedstrijden</b>
+        Iker Casillas
+      </div>
+
+      <div class="team-kaart">
+        <b>Huidige kampioen</b>
+        Paris Saint-Germain
+      </div>
+    </div>
+
+    <div class="mooie-goals">
+      <h3>⚽ Mooie goals</h3>
+
+      <p>
+        Bekijk een verzameling van mooie en bijzondere doelpunten
+        uit de Champions League.
+      </p>
+
+      <a
+        class="goal-link"
+        href="https://www.youtube.com/playlist?list=PLhjLO-ekrsRu1FXl1Sx3yAl0pL_5c75bv"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ▶ Bekijk de mooiste goals
+      </a>
     </div>
   </section>
 
   <section class="over-ons" id="over-ons">
     <h2>Over ons</h2>
+
     <p>
       Wij brengen je het laatste nieuws, de belangrijkste wedstrijden en
       interessante statistieken uit de Champions League. Blijf op de hoogte
@@ -128,10 +403,22 @@ h2{margin:0 0 15px;padding-bottom:8px;color:navy;border-bottom:3px solid navy}
     </p>
 
     <h3>Hoe kun je ons bereiken?</h3>
+
     <div class="contactgegevens">
-      <p><strong>Telefoonnummer:</strong> 06-12345678</p>
-      <p><strong>Gmail:</strong> 1026@obsdetoverlaars.nl</p>
-      <p><strong>TikTok:</strong> @v_17nac</p>
+      <p>
+        <strong>Telefoonnummer:</strong>
+        06-12345678
+      </p>
+
+      <p>
+        <strong>Gmail:</strong>
+        1026@obsdetoverlaars.nl
+      </p>
+
+      <p>
+        <strong>TikTok:</strong>
+        @v_17ftb
+      </p>
     </div>
   </section>
 </main>
@@ -155,24 +442,30 @@ const teams=[
   ["LIV","Liverpool","Engeland"]
 ];
 
-const wedstrijdenLijst=document.querySelector("#wedstrijden-lijst");
-const teamsLijst=document.querySelector("#teams-lijst");
+const maakLijst=(id,data,template)=>
+  document.querySelector(id).innerHTML=data.map(template).join("");
 
-wedstrijdenLijst.innerHTML=wedstrijden.map(w=>`
-  <li>
-    <span class="teams">${w[0]}</span>
-    <span class="datum">${w[1]}</span>
-    <span class="tijd">${w[2]}</span>
-  </li>
-`).join("");
+maakLijst(
+  "#wedstrijden-lijst",
+  wedstrijden,
+  ([team,datum,tijd])=>`
+    <li>
+      <span class="teams">${team}</span>
+      <span class="datum">${datum}</span>
+      <span class="tijd">${tijd}</span>
+    </li>`
+);
 
-teamsLijst.innerHTML=teams.map(t=>`
-  <li class="team-kaart">
-    <div class="team-logo">${t[0]}</div>
-    <span class="team-naam">${t[1]}</span>
-    <span class="team-land">${t[2]}</span>
-  </li>
-`).join("");
+maakLijst(
+  "#teams-lijst",
+  teams,
+  ([logo,naam,land])=>`
+    <li class="team-kaart">
+      <div class="team-logo">${logo}</div>
+      <span class="team-naam">${naam}</span>
+      <span class="team-land">${land}</span>
+    </li>`
+);
 </script>
 
 </body>
