@@ -13,9 +13,13 @@
   --gold:#ffd700
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box
+}
 
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth
+}
 
 body{
   margin:0;
@@ -26,12 +30,9 @@ header{
   padding:20px;
   text-align:center;
   color:#fff;
-  background:var(--navy)
+  background:var(--navy);
+  scroll-margin-top:80px
 }
-
-header,
-section,
-.mooie-goals{scroll-margin-top:80px}
 
 .header-inhoud{
   display:flex;
@@ -45,8 +46,13 @@ section,
   line-height:1
 }
 
-header h1{margin:0 0 8px}
-header p{margin:0}
+header h1{
+  margin:0 0 8px
+}
+
+header p{
+  margin:0
+}
 
 nav{
   position:sticky;
@@ -68,21 +74,31 @@ nav ul{
 
 nav a{
   display:inline-block;
+  padding:0;
   color:#fff;
+  background:none;
+  border:0;
   font:inherit;
   font-weight:bold;
   text-decoration:none;
   cursor:pointer;
-  transition:.2s
+  transition:color .2s, transform .2s
 }
 
 nav a:hover,
-nav a.active{color:#00d4ff}
+nav a.active{
+  color:#00d4ff
+}
 
 nav a:focus-visible{
   outline:2px solid #00d4ff;
   outline-offset:5px;
   border-radius:3px
+}
+
+section,
+.mooie-goals{
+  scroll-margin-top:80px
 }
 
 section{
@@ -184,7 +200,9 @@ h2{
   font-size:10px
 }
 
-.statistieken{margin-top:35px}
+.statistieken{
+  margin-top:35px
+}
 
 .statistieken b{
   margin-bottom:6px;
@@ -192,6 +210,7 @@ h2{
   font-size:11px
 }
 
+/* Mooie goals */
 .mooie-goals{
   position:relative;
   overflow:hidden;
@@ -270,7 +289,8 @@ h2{
 }
 
 .over-ons{
-  margin:35px auto 25px;
+  margin-top:35px;
+  margin-bottom:25px;
   padding:20px;
   background:var(--light);
   border:2px solid #ccc;
@@ -288,38 +308,70 @@ h2{
   color:var(--navy)
 }
 
-.contactgegevens p{margin:10px 0}
+.contactgegevens p{
+  margin:10px 0
+}
 
 @media(max-width:600px){
-  .header-inhoud{gap:10px}
-  .trofee{font-size:28px}
-  header h1{font-size:24px}
-  header p{font-size:14px}
+  .header-inhoud{
+    gap:10px
+  }
 
-  section{width:calc(100% - 20px)}
+  .trofee{
+    font-size:28px
+  }
+
+  header h1{
+    font-size:24px
+  }
+
+  header p{
+    font-size:14px
+  }
+
+  section{
+    width:calc(100% - 20px)
+  }
 
   .wedstrijden ul,
-  .team-grid{gap:8px}
+  .team-grid{
+    gap:8px
+  }
 
   .wedstrijden li,
-  .team-kaart{height:100px}
+  .team-kaart{
+    height:100px
+  }
 
   nav ul{
     flex-wrap:wrap;
     gap:15px
   }
 
-  nav a{font-size:14px}
+  nav a{
+    font-size:14px
+  }
 
   .mooie-goals{
     min-height:270px;
     padding:40px 22px
   }
 
-  .mooie-goals:before{font-size:80px}
-  .mooie-goals:after{font-size:100px}
-  .mooie-goals h3{font-size:28px}
-  .mooie-goals p{font-size:17px}
+  .mooie-goals:before{
+    font-size:80px
+  }
+
+  .mooie-goals:after{
+    font-size:100px
+  }
+
+  .mooie-goals h3{
+    font-size:28px
+  }
+
+  .mooie-goals p{
+    font-size:17px
+  }
 
   .goal-link{
     padding:14px 24px;
@@ -346,12 +398,29 @@ h2{
 
 <nav aria-label="Hoofdnavigatie">
   <ul>
-    <li><a href="#top">Home</a></li>
-    <li><a href="#wedstrijden">Wedstrijden</a></li>
-    <li><a href="#teams">Teams</a></li>
-    <li><a href="#statistieken">Statistieken</a></li>
-    <li><a href="#goals">Goals</a></li>
-    <li><a href="#over-ons">Over ons</a></li>
+    <li>
+      <a href="#top">Home</a>
+    </li>
+
+    <li>
+      <a href="#wedstrijden">Wedstrijden</a>
+    </li>
+
+    <li>
+      <a href="#teams">Teams</a>
+    </li>
+
+    <li>
+      <a href="#statistieken">Statistieken</a>
+    </li>
+
+    <li>
+      <a href="#goals">Goals</a>
+    </li>
+
+    <li>
+      <a href="#over-ons">Over ons</a>
+    </li>
   </ul>
 </nav>
 
@@ -361,14 +430,35 @@ h2{
     <ul id="wedstrijden-lijst"></ul>
   </section>
 
-  <section id="teams">
+  <section class="populaire-teams" id="teams">
     <h2>Populaire teams</h2>
     <ul id="teams-lijst" class="team-grid"></ul>
   </section>
 
-  <section class="statistieken" id="statistieken">
+  <section class="populaire-teams statistieken" id="statistieken">
     <h2>Statistieken</h2>
-    <div id="statistieken-lijst" class="team-grid"></div>
+
+    <div class="team-grid">
+      <div class="team-kaart">
+        <b>Meeste titels</b>
+        Real Madrid
+      </div>
+
+      <div class="team-kaart">
+        <b>Meeste doelpunten</b>
+        Cristiano Ronaldo
+      </div>
+
+      <div class="team-kaart">
+        <b>Meeste wedstrijden</b>
+        Iker Casillas
+      </div>
+
+      <div class="team-kaart">
+        <b>Huidige kampioen</b>
+        Paris Saint-Germain
+      </div>
+    </div>
 
     <div class="mooie-goals" id="goals">
       <h3>⚽ Mooie goals</h3>
@@ -401,46 +491,51 @@ h2{
     <h3>Hoe kun je ons bereiken?</h3>
 
     <div class="contactgegevens">
-      <p><strong>Telefoonnummer:</strong> 06-12345678</p>
-      <p><strong>Gmail:</strong> 1026@obsdetoverlaars.nl</p>
-      <p><strong>TikTok:</strong> @v_17ftb</p>
+      <p>
+        <strong>Telefoonnummer:</strong>
+        06-12345678
+      </p>
+
+      <p>
+        <strong>Gmail:</strong>
+        1026@obsdetoverlaars.nl
+      </p>
+
+      <p>
+        <strong>TikTok:</strong>
+        @v_17ftb
+      </p>
     </div>
   </section>
 </main>
 
 <script>
-const wedstrijden=[
-  ["Real Madrid - Manchester City","24 november 2026","21:00 uur"],
-  ["Barcelona - Bayern München","25 november 2026","21:00 uur"],
-  ["PSG - Arsenal","1 december 2026","20:45 uur"],
-  ["Liverpool - Inter","2 december 2026","21:00 uur"],
-  ["AC Milan - Dortmund","8 december 2026","21:00 uur"],
-  ["Ajax - Atlético Madrid","9 december 2026","18:45 uur"]
+const wedstrijden = [
+  ["Real Madrid - Manchester City", "24 november 2026", "21:00 uur"],
+  ["Barcelona - Bayern München", "25 november 2026", "21:00 uur"],
+  ["PSG - Arsenal", "1 december 2026", "20:45 uur"],
+  ["Liverpool - Inter", "2 december 2026", "21:00 uur"],
+  ["AC Milan - Dortmund", "8 december 2026", "21:00 uur"],
+  ["Ajax - Atlético Madrid", "9 december 2026", "18:45 uur"]
 ];
 
-const teams=[
-  ["NAC","NAC","Nederland"],
-  ["RMA","Real Madrid","Spanje"],
-  ["BAR","Barcelona","Spanje"],
-  ["BAY","Bayern München","Duitsland"],
-  ["MCI","Manchester City","Engeland"],
-  ["LIV","Liverpool","Engeland"]
+const teams = [
+  ["NAC", "NAC", "Nederland"],
+  ["RMA", "Real Madrid", "Spanje"],
+  ["BAR", "Barcelona", "Spanje"],
+  ["BAY", "Bayern München", "Duitsland"],
+  ["MCI", "Manchester City", "Engeland"],
+  ["LIV", "Liverpool", "Engeland"]
 ];
 
-const statistieken=[
-  ["Meeste titels","Real Madrid"],
-  ["Meeste doelpunten","Cristiano Ronaldo"],
-  ["Meeste wedstrijden","Iker Casillas"],
-  ["Huidige kampioen","Paris Saint-Germain"]
-];
-
-const maakLijst=(id,data,template)=>
-  document.querySelector(id).innerHTML=data.map(template).join("");
+const maakLijst = (id, data, template) => {
+  document.querySelector(id).innerHTML = data.map(template).join("");
+};
 
 maakLijst(
   "#wedstrijden-lijst",
   wedstrijden,
-  ([team,datum,tijd])=>`
+  ([team, datum, tijd]) => `
     <li>
       <span class="teams">${team}</span>
       <span class="datum">${datum}</span>
@@ -452,7 +547,7 @@ maakLijst(
 maakLijst(
   "#teams-lijst",
   teams,
-  ([logo,naam,land])=>`
+  ([logo, naam, land]) => `
     <li class="team-kaart">
       <div class="team-logo">${logo}</div>
       <span class="team-naam">${naam}</span>
@@ -461,46 +556,67 @@ maakLijst(
   `
 );
 
-maakLijst(
-  "#statistieken-lijst",
-  statistieken,
-  ([titel,waarde])=>`
-    <div class="team-kaart">
-      <b>${titel}</b>
-      ${waarde}
-    </div>
-  `
-);
+/*
+  Werkende navigatie
+*/
+const navigatieLinks = [
+  ...document.querySelectorAll("nav a")
+];
 
-const navigatieLinks=[...document.querySelectorAll("nav a")];
-
-const navigatieDoelen=navigatieLinks
-  .map(link=>document.querySelector(link.getAttribute("href")))
+const navigatieDoelen = navigatieLinks
+  .map(link => {
+    const doel = document.querySelector(link.getAttribute("href"));
+    return doel;
+  })
   .filter(Boolean);
 
-function updateActieveNavigatie(){
-  const positie=window.scrollY+120;
-  let actiefDoel=navigatieDoelen[0];
+function absoluteTop(element){
+  return element.getBoundingClientRect().top + window.scrollY;
+}
 
-  navigatieDoelen.forEach(doel=>{
-    const bovenkant=doel.getBoundingClientRect().top+window.scrollY;
-    if(bovenkant<=positie) actiefDoel=doel;
+function updateActieveNavigatie(){
+  const scrollPositie = window.scrollY + 120;
+
+  let actiefDoel = navigatieDoelen[0];
+
+  navigatieDoelen.forEach(doel => {
+    if (absoluteTop(doel) <= scrollPositie) {
+      actiefDoel = doel;
+    }
   });
 
-  navigatieLinks.forEach(link=>{
-    const actief=document.querySelector(link.getAttribute("href"))===actiefDoel;
+  navigatieLinks.forEach(link => {
+    const linkDoel = document.querySelector(
+      link.getAttribute("href")
+    );
 
-    link.classList.toggle("active",actief);
+    const isActief = linkDoel === actiefDoel;
 
-    actief
-      ? link.setAttribute("aria-current","location")
-      : link.removeAttribute("aria-current");
+    link.classList.toggle("active", isActief);
+
+    if (isActief) {
+      link.setAttribute("aria-current", "location");
+    } else {
+      link.removeAttribute("aria-current");
+    }
   });
 }
 
-window.addEventListener("scroll",updateActieveNavigatie,{passive:true});
-window.addEventListener("load",updateActieveNavigatie);
-window.addEventListener("resize",updateActieveNavigatie);
+window.addEventListener(
+  "scroll",
+  updateActieveNavigatie,
+  { passive:true }
+);
+
+window.addEventListener(
+  "load",
+  updateActieveNavigatie
+);
+
+window.addEventListener(
+  "resize",
+  updateActieveNavigatie
+);
 </script>
 
 </body>
