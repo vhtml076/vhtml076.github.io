@@ -14,8 +14,13 @@
 }
 
 *{box-sizing:border-box}
+
 html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial,sans-serif}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif
+}
 
 header{
   padding:20px;
@@ -24,6 +29,10 @@ header{
   background:var(--navy)
 }
 
+header,
+section,
+.mooie-goals{scroll-margin-top:80px}
+
 .header-inhoud{
   display:flex;
   justify-content:center;
@@ -31,14 +40,18 @@ header{
   gap:20px
 }
 
-.trofee{font-size:42px;line-height:1}
+.trofee{
+  font-size:42px;
+  line-height:1
+}
+
 header h1{margin:0 0 8px}
 header p{margin:0}
 
 nav{
   position:sticky;
   top:0;
-  z-index:1;
+  z-index:10;
   padding:12px;
   background:#000;
   box-shadow:0 2px 6px #0004
@@ -53,17 +66,24 @@ nav ul{
   list-style:none
 }
 
-nav button{
-  padding:0;
+nav a{
+  display:inline-block;
   color:#fff;
-  background:none;
-  border:0;
   font:inherit;
   font-weight:bold;
-  cursor:pointer
+  text-decoration:none;
+  cursor:pointer;
+  transition:.2s
 }
 
-nav button:hover{color:#00d4ff}
+nav a:hover,
+nav a.active{color:#00d4ff}
+
+nav a:focus-visible{
+  outline:2px solid #00d4ff;
+  outline-offset:5px;
+  border-radius:3px
+}
 
 section{
   width:calc(100% - 40px);
@@ -172,7 +192,6 @@ h2{
   font-size:11px
 }
 
-/* Nog één tikje groter gedeelte voor Mooie goals */
 .mooie-goals{
   position:relative;
   overflow:hidden;
@@ -251,8 +270,7 @@ h2{
 }
 
 .over-ons{
-  margin-top:35px;
-  margin-bottom:25px;
+  margin:35px auto 25px;
   padding:20px;
   background:var(--light);
   border:2px solid #ccc;
@@ -291,28 +309,17 @@ h2{
     gap:15px
   }
 
-  nav button{font-size:14px}
+  nav a{font-size:14px}
 
   .mooie-goals{
     min-height:270px;
     padding:40px 22px
   }
 
-  .mooie-goals:before{
-    font-size:80px
-  }
-
-  .mooie-goals:after{
-    font-size:100px
-  }
-
-  .mooie-goals h3{
-    font-size:28px
-  }
-
-  .mooie-goals p{
-    font-size:17px
-  }
+  .mooie-goals:before{font-size:80px}
+  .mooie-goals:after{font-size:100px}
+  .mooie-goals h3{font-size:28px}
+  .mooie-goals p{font-size:17px}
 
   .goal-link{
     padding:14px 24px;
@@ -324,25 +331,27 @@ h2{
 
 <body>
 
-<header>
+<header id="top">
   <div class="header-inhoud">
     <span class="trofee">🏆</span>
+
     <div>
       <h1>Champions League</h1>
       <p>Alles over de Champions League</p>
     </div>
+
     <span class="trofee">🏆</span>
   </div>
 </header>
 
-<nav>
+<nav aria-label="Hoofdnavigatie">
   <ul>
-    <li><button>Home</button></li>
-    <li><button>Wedstrijden</button></li>
-    <li><button>Teams</button></li>
-    <li><button>Statistieken</button></li>
-    <li><button>Goals</button></li>
-    <li><button>Over ons</button></li>
+    <li><a href="#top">Home</a></li>
+    <li><a href="#wedstrijden">Wedstrijden</a></li>
+    <li><a href="#teams">Teams</a></li>
+    <li><a href="#statistieken">Statistieken</a></li>
+    <li><a href="#goals">Goals</a></li>
+    <li><a href="#over-ons">Over ons</a></li>
   </ul>
 </nav>
 
@@ -352,37 +361,16 @@ h2{
     <ul id="wedstrijden-lijst"></ul>
   </section>
 
-  <section class="populaire-teams" id="teams">
+  <section id="teams">
     <h2>Populaire teams</h2>
     <ul id="teams-lijst" class="team-grid"></ul>
   </section>
 
-  <section class="populaire-teams statistieken" id="statistieken">
+  <section class="statistieken" id="statistieken">
     <h2>Statistieken</h2>
+    <div id="statistieken-lijst" class="team-grid"></div>
 
-    <div class="team-grid">
-      <div class="team-kaart">
-        <b>Meeste titels</b>
-        Real Madrid
-      </div>
-
-      <div class="team-kaart">
-        <b>Meeste doelpunten</b>
-        Cristiano Ronaldo
-      </div>
-
-      <div class="team-kaart">
-        <b>Meeste wedstrijden</b>
-        Iker Casillas
-      </div>
-
-      <div class="team-kaart">
-        <b>Huidige kampioen</b>
-        Paris Saint-Germain
-      </div>
-    </div>
-
-    <div class="mooie-goals">
+    <div class="mooie-goals" id="goals">
       <h3>⚽ Mooie goals</h3>
 
       <p>
@@ -413,20 +401,9 @@ h2{
     <h3>Hoe kun je ons bereiken?</h3>
 
     <div class="contactgegevens">
-      <p>
-        <strong>Telefoonnummer:</strong>
-        06-12345678
-      </p>
-
-      <p>
-        <strong>Gmail:</strong>
-        1026@obsdetoverlaars.nl
-      </p>
-
-      <p>
-        <strong>TikTok:</strong>
-        @v_17ftb
-      </p>
+      <p><strong>Telefoonnummer:</strong> 06-12345678</p>
+      <p><strong>Gmail:</strong> 1026@obsdetoverlaars.nl</p>
+      <p><strong>TikTok:</strong> @v_17ftb</p>
     </div>
   </section>
 </main>
@@ -450,6 +427,13 @@ const teams=[
   ["LIV","Liverpool","Engeland"]
 ];
 
+const statistieken=[
+  ["Meeste titels","Real Madrid"],
+  ["Meeste doelpunten","Cristiano Ronaldo"],
+  ["Meeste wedstrijden","Iker Casillas"],
+  ["Huidige kampioen","Paris Saint-Germain"]
+];
+
 const maakLijst=(id,data,template)=>
   document.querySelector(id).innerHTML=data.map(template).join("");
 
@@ -461,7 +445,8 @@ maakLijst(
       <span class="teams">${team}</span>
       <span class="datum">${datum}</span>
       <span class="tijd">${tijd}</span>
-    </li>`
+    </li>
+  `
 );
 
 maakLijst(
@@ -472,8 +457,50 @@ maakLijst(
       <div class="team-logo">${logo}</div>
       <span class="team-naam">${naam}</span>
       <span class="team-land">${land}</span>
-    </li>`
+    </li>
+  `
 );
+
+maakLijst(
+  "#statistieken-lijst",
+  statistieken,
+  ([titel,waarde])=>`
+    <div class="team-kaart">
+      <b>${titel}</b>
+      ${waarde}
+    </div>
+  `
+);
+
+const navigatieLinks=[...document.querySelectorAll("nav a")];
+
+const navigatieDoelen=navigatieLinks
+  .map(link=>document.querySelector(link.getAttribute("href")))
+  .filter(Boolean);
+
+function updateActieveNavigatie(){
+  const positie=window.scrollY+120;
+  let actiefDoel=navigatieDoelen[0];
+
+  navigatieDoelen.forEach(doel=>{
+    const bovenkant=doel.getBoundingClientRect().top+window.scrollY;
+    if(bovenkant<=positie) actiefDoel=doel;
+  });
+
+  navigatieLinks.forEach(link=>{
+    const actief=document.querySelector(link.getAttribute("href"))===actiefDoel;
+
+    link.classList.toggle("active",actief);
+
+    actief
+      ? link.setAttribute("aria-current","location")
+      : link.removeAttribute("aria-current");
+  });
+}
+
+window.addEventListener("scroll",updateActieveNavigatie,{passive:true});
+window.addEventListener("load",updateActieveNavigatie);
+window.addEventListener("resize",updateActieveNavigatie);
 </script>
 
 </body>
