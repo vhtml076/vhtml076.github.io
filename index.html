@@ -1,665 +1,497 @@
 <!doctype html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Alles over de Champions League</title>
-
-<style>
-:root{
-  --navy:navy;
-  --blue:#123b78;
-  --light:#f4f6fa;
-  --gold:#ffd700
-}
-
-*{
-  box-sizing:border-box
-}
-
-html{
-  scroll-behavior:smooth
-}
-
-body{
-  margin:0;
-  font-family:Arial,sans-serif
-}
-
-header{
-  padding:20px;
-  text-align:center;
-  color:#fff;
-  background:var(--navy);
-  scroll-margin-top:80px
-}
-
-.header-inhoud{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:20px
-}
-
-.trofee{
-  font-size:42px;
-  line-height:1
-}
-
-header h1{
-  margin:0 0 8px
-}
-
-header p{
-  margin:0
-}
-
-nav{
-  position:sticky;
-  top:0;
-  z-index:10;
-  padding:12px;
-  background:#000;
-  box-shadow:0 2px 6px #0004
-}
-
-nav ul{
-  display:flex;
-  justify-content:center;
-  gap:30px;
-  margin:0;
-  padding:0;
-  list-style:none
-}
-
-nav a{
-  display:inline-block;
-  padding:0;
-  color:#fff;
-  background:none;
-  border:0;
-  font:inherit;
-  font-weight:bold;
-  text-decoration:none;
-  cursor:pointer;
-  transition:color .2s, transform .2s
-}
-
-nav a:hover,
-nav a.active{
-  color:#00d4ff
-}
-
-nav a:focus-visible{
-  outline:2px solid #00d4ff;
-  outline-offset:5px;
-  border-radius:3px
-}
-
-section,
-.mooie-goals{
-  scroll-margin-top:80px
-}
-
-section{
-  width:calc(100% - 40px);
-  max-width:760px;
-  margin:25px auto
-}
-
-h2{
-  margin:0 0 15px;
-  padding-bottom:8px;
-  color:var(--navy);
-  border-bottom:3px solid var(--navy)
-}
-
-.wedstrijden ul,
-.team-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin:0;
-  padding:0;
-  list-style:none
-}
-
-.wedstrijden li,
-.team-kaart{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  height:105px;
-  text-align:center
-}
-
-.wedstrijden li{
-  padding:10px;
-  background:var(--light);
-  border:2px solid #ccc;
-  border-radius:8px;
-  cursor:pointer;
-  transition:transform .2s, box-shadow .2s, border-color .2s
-}
-
-.wedstrijden li:hover,
-.wedstrijden li:focus-visible{
-  border-color:#00a9cc;
-  transform:translateY(-3px);
-  box-shadow:0 5px 10px #00008040
-}
-
-.wedstrijden li:focus-visible{
-  outline:3px solid #00d4ff;
-  outline-offset:3px
-}
-
-.team-kaart{
-  padding:8px;
-  color:#fff;
-  background:linear-gradient(135deg,var(--navy),var(--blue));
-  border:2px solid var(--navy);
-  border-radius:10px
-}
-
-.team-kaart:hover{
-  transform:translateY(-3px);
-  box-shadow:0 5px 10px #00008040
-}
-
-.teams{
-  margin-bottom:5px;
-  color:var(--navy);
-  font-size:13px;
-  font-weight:bold
-}
-
-.datum{
-  margin-bottom:6px;
-  color:#555;
-  font-size:11px
-}
-
-.tijd{
-  padding:3px 7px;
-  color:#fff;
-  background:var(--navy);
-  border-radius:4px;
-  font-size:11px
-}
-
-.team-logo{
-  display:grid;
-  place-items:center;
-  width:32px;
-  height:32px;
-  margin-bottom:4px;
-  color:var(--navy);
-  background:#fff;
-  border-radius:50%;
-  font-size:10px;
-  font-weight:bold
-}
-
-.team-naam{
-  margin-bottom:2px;
-  font-size:13px;
-  font-weight:bold
-}
-
-.team-land{
-  color:#d9eaff;
-  font-size:10px
-}
-
-.statistieken{
-  margin-top:35px
-}
-
-.statistieken b{
-  margin-bottom:6px;
-  color:#d9eaff;
-  font-size:11px
-}
-
-/* Detailblad van een wedstrijd */
-.wedstrijd-detail{
-  width:calc(100% - 40px);
-  max-width:760px;
-  margin:25px auto;
-  padding:25px;
-  background:var(--light);
-  border:2px solid #ccc;
-  border-radius:10px;
-  scroll-margin-top:80px
-}
-
-.wedstrijd-detail[hidden]{
-  display:none
-}
-
-main.detail-modus > section:not(#wedstrijd-detail){
-  display:none
-}
-
-.terug-knop{
-  margin-bottom:25px;
-  padding:10px 16px;
-  color:#fff;
-  background:var(--navy);
-  border:0;
-  border-radius:6px;
-  font:inherit;
-  font-weight:bold;
-  cursor:pointer
-}
-
-.terug-knop:hover,
-.terug-knop:focus-visible{
-  background:#00a9cc
-}
-
-.terug-knop:focus-visible{
-  outline:3px solid #00d4ff;
-  outline-offset:3px
-}
-
-.wedstrijd-meta{
-  margin-bottom:25px;
-  padding:15px;
-  background:#fff;
-  border-left:5px solid var(--navy);
-  border-radius:6px
-}
-
-.wedstrijd-meta p{
-  margin:8px 0
-}
-
-.wedstrijd-informatie{
-  padding:20px;
-  background:#fff;
-  border:1px solid #ccc;
-  border-radius:8px
-}
-
-.wedstrijd-informatie h3{
-  margin-top:0;
-  color:var(--navy)
-}
-
-.wedstrijd-informatie dl{
-  display:grid;
-  grid-template-columns:180px 1fr;
-  gap:12px 20px;
-  margin:0
-}
-
-.wedstrijd-informatie dt{
-  color:var(--navy);
-  font-weight:bold
-}
-
-.wedstrijd-informatie dd{
-  margin:0;
-  color:#555
-}
-
-/* Mooie goals */
-.mooie-goals{
-  position:relative;
-  overflow:hidden;
-  min-height:320px;
-  margin-top:35px;
-  padding:58px 46px;
-  text-align:center;
-  color:#fff;
-  background:linear-gradient(135deg,#06152f,var(--blue));
-  border:2px solid #00d4ff;
-  border-radius:14px;
-  box-shadow:0 5px 12px #0003
-}
-
-.mooie-goals:before,
-.mooie-goals:after{
-  position:absolute;
-  pointer-events:none
-}
-
-.mooie-goals:before{
-  content:"⚽";
-  top:-15px;
-  left:18px;
-  color:#ffffff22;
-  font-size:100px;
-  transform:rotate(-20deg)
-}
-
-.mooie-goals:after{
-  content:"✦";
-  right:25px;
-  bottom:-25px;
-  color:#ffd70055;
-  font-size:125px;
-  transform:rotate(15deg)
-}
-
-.mooie-goals h3,
-.mooie-goals p,
-.goal-link{
-  position:relative;
-  z-index:1
-}
-
-.mooie-goals h3{
-  margin:0 0 21px;
-  color:var(--gold);
-  font-size:35px
-}
-
-.mooie-goals p{
-  max-width:680px;
-  margin:0 auto 31px;
-  color:#eaf6ff;
-  font-size:19px;
-  line-height:1.65
-}
-
-.goal-link{
-  display:inline-block;
-  padding:16px 30px;
-  color:var(--navy);
-  background:var(--gold);
-  border-radius:25px;
-  font-size:18px;
-  font-weight:bold;
-  text-decoration:none;
-  transition:.2s
-}
-
-.goal-link:hover{
-  color:#fff;
-  background:#00a9cc;
-  transform:scale(1.05)
-}
-
-.over-ons{
-  margin-top:35px;
-  margin-bottom:25px;
-  padding:20px;
-  background:var(--light);
-  border:2px solid #ccc;
-  border-radius:10px
-}
-
-.over-ons p{
-  margin:0;
-  color:#333;
-  line-height:1.6
-}
-
-.over-ons h3{
-  margin:25px 0 12px;
-  color:var(--navy)
-}
-
-.contactgegevens p{
-  margin:10px 0
-}
-
-@media(max-width:600px){
-  .header-inhoud{
-    gap:10px
-  }
-
-  .trofee{
-    font-size:28px
-  }
-
-  header h1{
-    font-size:24px
-  }
-
-  header p{
-    font-size:14px
-  }
-
-  section{
-    width:calc(100% - 20px)
-  }
-
-  .wedstrijden ul,
-  .team-grid{
-    gap:8px
-  }
-
-  .wedstrijden li,
-  .team-kaart{
-    height:100px
-  }
-
-  nav ul{
-    flex-wrap:wrap;
-    gap:15px
-  }
-
-  nav a{
-    font-size:14px
-  }
-
-  .wedstrijd-detail{
-    width:calc(100% - 20px);
-    padding:18px
-  }
-
-  .wedstrijd-informatie dl{
-    grid-template-columns:1fr;
-    gap:4px
-  }
-
-  .wedstrijd-informatie dd{
-    margin-bottom:12px
-  }
-
-  .mooie-goals{
-    min-height:270px;
-    padding:40px 22px
-  }
-
-  .mooie-goals:before{
-    font-size:80px
-  }
-
-  .mooie-goals:after{
-    font-size:100px
-  }
-
-  .mooie-goals h3{
-    font-size:28px
-  }
-
-  .mooie-goals p{
-    font-size:17px
-  }
-
-  .goal-link{
-    padding:14px 24px;
-    font-size:16px
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alles over de Champions League</title>
+
+  <style>
+    :root {
+      --blauw: navy;
+      --donkerblauw: #123b78;
+      --licht: #f4f6fa;
+      --geel: #ffd700;
+      --cyaan: #00d4ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      padding: 20px;
+      color: white;
+      text-align: center;
+      background: var(--blauw);
+    }
+
+    .header-inhoud {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .trofee {
+      font-size: 42px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      padding: 12px;
+      background: black;
+      box-shadow: 0 2px 6px #0004;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    nav a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--cyaan);
+    }
+
+    section {
+      width: calc(100% - 40px);
+      max-width: 760px;
+      margin: 25px auto;
+      scroll-margin-top: 80px;
+    }
+
+    h2 {
+      margin: 0 0 15px;
+      padding-bottom: 8px;
+      color: var(--blauw);
+      border-bottom: 3px solid var(--blauw);
+    }
+
+    .wedstrijden ul,
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .wedstrijd,
+    .team-kaart {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 105px;
+      padding: 10px;
+      text-align: center;
+      border-radius: 9px;
+    }
+
+    .wedstrijd {
+      background: var(--licht);
+      border: 2px solid #ccc;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .wedstrijd:hover,
+    .wedstrijd:focus {
+      border-color: #00a9cc;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 10px #0003;
+      outline: none;
+    }
+
+    .team-kaart {
+      color: white;
+      background: linear-gradient(
+        135deg,
+        var(--blauw),
+        var(--donkerblauw)
+      );
+      border: 2px solid var(--blauw);
+    }
+
+    .teams {
+      margin-bottom: 6px;
+      color: var(--blauw);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .datum {
+      margin-bottom: 6px;
+      color: #555;
+      font-size: 11px;
+    }
+
+    .tijd {
+      padding: 3px 7px;
+      color: white;
+      background: var(--blauw);
+      border-radius: 4px;
+      font-size: 11px;
+    }
+
+    .team-logo {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      margin-bottom: 4px;
+      color: var(--blauw);
+      background: white;
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .team-naam {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .team-land {
+      color: #d9eaff;
+      font-size: 10px;
+    }
+
+    .statistieken {
+      margin-top: 35px;
+    }
+
+    /* Eenvoudig scherm na het klikken op een wedstrijd */
+    .wedstrijd-detail {
+      width: calc(100% - 40px);
+      max-width: 600px;
+      margin: 25px auto;
+      padding: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .wedstrijd-detail[hidden] {
+      display: none;
+    }
+
+    .detail-modus > section:not(#wedstrijd-detail) {
+      display: none;
+    }
+
+    .terug-knop {
+      margin-bottom: 20px;
+      padding: 8px 12px;
+      color: white;
+      background: var(--blauw);
+      border: 0;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .terug-knop:hover {
+      background: #00a9cc;
+    }
+
+    .detail-tekst {
+      color: #555;
+      font-size: 15px;
+    }
+
+    .simpel-info {
+      margin-top: 20px;
+      padding: 15px;
+      background: var(--licht);
+      border-left: 4px solid var(--blauw);
+      border-radius: 5px;
+    }
+
+    .simpel-info p {
+      margin: 10px 0;
+    }
+
+    .nog-geen-info {
+      color: #666;
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    .mooie-goals {
+      margin-top: 35px;
+      padding: 58px 46px;
+      color: white;
+      text-align: center;
+      background: linear-gradient(
+        135deg,
+        #06152f,
+        var(--donkerblauw)
+      );
+      border: 2px solid var(--cyaan);
+      border-radius: 14px;
+    }
+
+    .mooie-goals h3 {
+      margin: 0 0 21px;
+      color: var(--geel);
+      font-size: 35px;
+    }
+
+    .mooie-goals p {
+      margin: 0 auto 31px;
+      color: #eaf6ff;
+      font-size: 19px;
+      line-height: 1.6;
+    }
+
+    .goal-link {
+      display: inline-block;
+      padding: 16px 30px;
+      color: var(--blauw);
+      background: var(--geel);
+      border-radius: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .goal-link:hover {
+      color: white;
+      background: #00a9cc;
+    }
+
+    .over-ons {
+      margin-bottom: 25px;
+      padding: 20px;
+      background: var(--licht);
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+
+    .over-ons p {
+      line-height: 1.6;
+    }
+
+    .over-ons h3 {
+      color: var(--blauw);
+    }
+
+    @media (max-width: 600px) {
+      .header-inhoud {
+        gap: 10px;
+      }
+
+      .trofee {
+        font-size: 28px;
+      }
+
+      header h1 {
+        font-size: 24px;
+      }
+
+      header p {
+        font-size: 14px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      nav a {
+        font-size: 14px;
+      }
+
+      section,
+      .wedstrijd-detail {
+        width: calc(100% - 20px);
+      }
+
+      .wedstrijden ul,
+      .team-grid {
+        gap: 8px;
+      }
+
+      .wedstrijd-detail {
+        padding: 18px;
+      }
+
+      .mooie-goals {
+        padding: 40px 22px;
+      }
+
+      .mooie-goals h3 {
+        font-size: 28px;
+      }
+
+      .mooie-goals p {
+        font-size: 17px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header id="top">
-  <div class="header-inhoud">
-    <span class="trofee">🏆</span>
+  <header id="top">
+    <div class="header-inhoud">
+      <span class="trofee">🏆</span>
 
-    <div>
-      <h1>Champions League</h1>
-      <p>Alles over de Champions League</p>
-    </div>
-
-    <span class="trofee">🏆</span>
-  </div>
-</header>
-
-<nav aria-label="Hoofdnavigatie">
-  <ul>
-    <li>
-      <a href="#top">Home</a>
-    </li>
-
-    <li>
-      <a href="#wedstrijden">Wedstrijden</a>
-    </li>
-
-    <li>
-      <a href="#teams">Teams</a>
-    </li>
-
-    <li>
-      <a href="#statistieken">Statistieken</a>
-    </li>
-
-    <li>
-      <a href="#goals">Goals</a>
-    </li>
-
-    <li>
-      <a href="#over-ons">Over ons</a>
-    </li>
-  </ul>
-</nav>
-
-<main>
-
-  <section class="wedstrijden" id="wedstrijden">
-    <h2>Komende wedstrijden</h2>
-    <ul id="wedstrijden-lijst"></ul>
-  </section>
-
-  <section
-    id="wedstrijd-detail"
-    class="wedstrijd-detail"
-    hidden
-    aria-live="polite"
-    aria-labelledby="wedstrijd-detail-titel"
-  >
-    <button
-      type="button"
-      class="terug-knop"
-      id="terug-naar-wedstrijden"
-    >
-      ← Terug naar komende wedstrijden
-    </button>
-
-    <h2 id="wedstrijd-detail-titel">
-      Wedstrijdinformatie
-    </h2>
-
-    <div class="wedstrijd-meta">
-      <p>
-        <strong>Wedstrijd:</strong>
-        <span id="detail-teams"></span>
-      </p>
-
-      <p>
-        <strong>Datum:</strong>
-        <span id="detail-datum"></span>
-      </p>
-
-      <p>
-        <strong>Tijd:</strong>
-        <span id="detail-tijd"></span>
-      </p>
-    </div>
-
-    <div class="wedstrijd-informatie">
-      <h3>Wedstrijdinformatie</h3>
-
-      <dl>
-        <dt>Competitie</dt>
-        <dd id="detail-competitie"></dd>
-
-        <dt>Stadion</dt>
-        <dd id="detail-stadion"></dd>
-
-        <dt>Scheidsrechter</dt>
-        <dd id="detail-scheidsrechter"></dd>
-
-        <dt>Opstellingen</dt>
-        <dd id="detail-opstellingen"></dd>
-
-        <dt>Wedstrijdverslag</dt>
-        <dd id="detail-verslag"></dd>
-      </dl>
-    </div>
-  </section>
-
-  <section class="populaire-teams" id="teams">
-    <h2>Populaire teams</h2>
-    <ul id="teams-lijst" class="team-grid"></ul>
-  </section>
-
-  <section class="populaire-teams statistieken" id="statistieken">
-    <h2>Statistieken</h2>
-
-    <div class="team-grid">
-      <div class="team-kaart">
-        <b>Meeste titels</b>
-        Real Madrid
+      <div>
+        <h1>Champions League</h1>
+        <p>Alles over de Champions League</p>
       </div>
 
-      <div class="team-kaart">
-        <b>Meeste doelpunten</b>
-        Cristiano Ronaldo
-      </div>
-
-      <div class="team-kaart">
-        <b>Meeste wedstrijden</b>
-        Iker Casillas
-      </div>
-
-      <div class="team-kaart">
-        <b>Huidige kampioen</b>
-        Paris Saint-Germain
-      </div>
+      <span class="trofee">🏆</span>
     </div>
+  </header>
 
-    <div class="mooie-goals" id="goals">
-      <h3>⚽ Mooie goals</h3>
+  <nav>
+    <ul>
+      <li><a href="#top">Home</a></li>
+      <li><a href="#wedstrijden">Wedstrijden</a></li>
+      <li><a href="#teams">Teams</a></li>
+      <li><a href="#statistieken">Statistieken</a></li>
+      <li><a href="#goals">Goals</a></li>
+      <li><a href="#over-ons">Over ons</a></li>
+    </ul>
+  </nav>
 
-      <p>
-        Bekijk een verzameling van mooie en bijzondere doelpunten
-        uit de Champions League.
+  <main>
+
+    <section class="wedstrijden" id="wedstrijden">
+      <h2>Komende wedstrijden</h2>
+      <ul id="wedstrijden-lijst"></ul>
+    </section>
+
+    <!-- Dit scherm verschijnt als je op een wedstrijd klikt -->
+    <section id="wedstrijd-detail" class="wedstrijd-detail" hidden>
+
+      <button class="terug-knop" id="terug-knop">
+        ← Terug
+      </button>
+
+      <h2 id="detail-titel">Wedstrijd</h2>
+
+      <p class="detail-tekst">
+        Hier staat wat informatie over deze wedstrijd.
       </p>
 
-      <a
-        class="goal-link"
-        href="https://www.youtube.com/playlist?list=PLhjLO-ekrsRu1FXl1Sx3yAl0pL_5c75bv"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        ▶ Bekijk de mooiste goals
-      </a>
-    </div>
-  </section>
+      <div class="simpel-info">
+        <p>
+          <strong>Teams:</strong>
+          <span id="detail-teams"></span>
+        </p>
 
-  <section class="over-ons" id="over-ons">
-    <h2>Over ons</h2>
+        <p>
+          <strong>Datum:</strong>
+          <span id="detail-datum"></span>
+        </p>
 
-    <p>
-      Wij brengen je het laatste nieuws, de belangrijkste wedstrijden en
-      interessante statistieken uit de Champions League. Blijf op de hoogte
-      van alles wat er speelt in het Europese topvoetbal.
-    </p>
+        <p>
+          <strong>Tijd:</strong>
+          <span id="detail-tijd"></span>
+        </p>
 
-    <h3>Hoe kun je ons bereiken?</h3>
+        <p class="nog-geen-info">
+          Meer informatie over deze wedstrijd komt later.
+        </p>
+      </div>
 
-    <div class="contactgegevens">
+    </section>
+
+    <section id="teams">
+      <h2>Populaire teams</h2>
+      <ul id="teams-lijst" class="team-grid"></ul>
+    </section>
+
+    <section id="statistieken" class="statistieken">
+      <h2>Statistieken</h2>
+
+      <div class="team-grid">
+        <div class="team-kaart">
+          <b>Meeste titels</b>
+          Real Madrid
+        </div>
+
+        <div class="team-kaart">
+          <b>Meeste doelpunten</b>
+          Cristiano Ronaldo
+        </div>
+
+        <div class="team-kaart">
+          <b>Meeste wedstrijden</b>
+          Iker Casillas
+        </div>
+
+        <div class="team-kaart">
+          <b>Huidige kampioen</b>
+          Paris Saint-Germain
+        </div>
+      </div>
+
+      <div class="mooie-goals" id="goals">
+        <h3>⚽ Mooie goals</h3>
+
+        <p>
+          Bekijk een verzameling van mooie en bijzondere doelpunten
+          uit de Champions League.
+        </p>
+
+        <a
+          class="goal-link"
+          href="https://www.youtube.com/playlist?list=PLhjLO-ekrsRu1FXl1Sx3yAl0pL_5c75bv"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ▶ Bekijk de mooiste goals
+        </a>
+      </div>
+    </section>
+
+    <section class="over-ons" id="over-ons">
+      <h2>Over ons</h2>
+
+      <p>
+        Wij brengen je het laatste nieuws, de belangrijkste wedstrijden en
+        interessante statistieken uit de Champions League. Blijf op de hoogte
+        van alles wat er speelt in het Europese topvoetbal.
+      </p>
+
+      <h3>Hoe kun je ons bereiken?</h3>
+
       <p>
         <strong>Telefoonnummer:</strong>
         06-12345678
@@ -674,391 +506,188 @@ main.detail-modus > section:not(#wedstrijd-detail){
         <strong>TikTok:</strong>
         @v_17ftb
       </p>
-    </div>
-  </section>
+    </section>
 
-</main>
+  </main>
 
-<script>
-const wedstrijden = [
-  ["Sabah - Barcelona", "25 november 2026", "18:45 uur"],
-  ["Slavia Praha - Villarreal", "25 november 2026", "18:45 uur"],
-  ["Shakhtar - Fenerbahçe", "25 november 2026", "21:00 uur"],
-  ["Lille - Bayern München", "25 november 2026", "21:00 uur"],
-  ["Club Brugge - Liverpool", "25 november 2026", "21:00 uur"],
-  ["Sporting CP - Man Utd", "25 november 2026", "21:00 uur"]
-];
+  <script>
+    const wedstrijden = [
+      ["Sabah - Barcelona", "25 november 2026", "18:45 uur"],
+      ["Slavia Praha - Villarreal", "25 november 2026", "18:45 uur"],
+      ["Shakhtar - Fenerbahçe", "25 november 2026", "21:00 uur"],
+      ["Lille - Bayern München", "25 november 2026", "21:00 uur"],
+      ["Club Brugge - Liverpool", "25 november 2026", "21:00 uur"],
+      ["Sporting CP - Man Utd", "25 november 2026", "21:00 uur"]
+    ];
 
-const teams = [
-  ["PSG", "PSG", "Frankrijk"],
-  ["RMA", "Real Madrid", "Spanje"],
-  ["BAR", "Barcelona", "Spanje"],
-  ["BAY", "Bayern München", "Duitsland"],
-  ["MCI", "Manchester City", "Engeland"],
-  ["LIV", "Liverpool", "Engeland"]
-];
+    const teams = [
+      ["PSG", "PSG", "Frankrijk"],
+      ["RMA", "Real Madrid", "Spanje"],
+      ["BAR", "Barcelona", "Spanje"],
+      ["BAY", "Bayern München", "Duitsland"],
+      ["MCI", "Manchester City", "Engeland"],
+      ["LIV", "Liverpool", "Engeland"]
+    ];
 
-const hoofdinhoud =
-  document.querySelector("main");
+    const main = document.querySelector("main");
+    const wedstrijdSectie = document.querySelector("#wedstrijden");
+    const wedstrijdLijst = document.querySelector("#wedstrijden-lijst");
+    const teamsLijst = document.querySelector("#teams-lijst");
+    const detail = document.querySelector("#wedstrijd-detail");
+    const terugKnop = document.querySelector("#terug-knop");
 
-const wedstrijdenSectie =
-  document.querySelector("#wedstrijden");
+    const detailTitel = document.querySelector("#detail-titel");
+    const detailTeams = document.querySelector("#detail-teams");
+    const detailDatum = document.querySelector("#detail-datum");
+    const detailTijd = document.querySelector("#detail-tijd");
 
-const wedstrijdenLijst =
-  document.querySelector("#wedstrijden-lijst");
+    let gekozenWedstrijd;
 
-const wedstrijdDetail =
-  document.querySelector("#wedstrijd-detail");
-
-const terugKnop =
-  document.querySelector("#terug-naar-wedstrijden");
-
-const detailTitel =
-  document.querySelector("#wedstrijd-detail-titel");
-
-const detailTeams =
-  document.querySelector("#detail-teams");
-
-const detailDatum =
-  document.querySelector("#detail-datum");
-
-const detailTijd =
-  document.querySelector("#detail-tijd");
-
-const detailCompetitie =
-  document.querySelector("#detail-competitie");
-
-const detailStadion =
-  document.querySelector("#detail-stadion");
-
-const detailScheidsrechter =
-  document.querySelector("#detail-scheidsrechter");
-
-const detailOpstellingen =
-  document.querySelector("#detail-opstellingen");
-
-const detailVerslag =
-  document.querySelector("#detail-verslag");
-
-const geenInformatie =
-  "Nog geen informatie beschikbaar";
-
-let laatstGeselecteerdeKaart = null;
-
-
-/*
-  Wedstrijden weergeven
-*/
-wedstrijdenLijst.innerHTML =
-  wedstrijden
-    .map(([team, datum, tijd], index) => `
+    wedstrijdLijst.innerHTML = wedstrijden.map((wedstrijd, index) => `
       <li
-        data-wedstrijd-index="${index}"
+        class="wedstrijd"
+        data-index="${index}"
         tabindex="0"
         role="button"
-        aria-label="Bekijk informatie over ${team}"
       >
-        <span class="teams">${team}</span>
-        <span class="datum">${datum}</span>
-        <span class="tijd">${tijd}</span>
+        <span class="teams">${wedstrijd[0]}</span>
+        <span class="datum">${wedstrijd[1]}</span>
+        <span class="tijd">${wedstrijd[2]}</span>
       </li>
-    `)
-    .join("");
+    `).join("");
 
-
-/*
-  Teams weergeven
-*/
-document.querySelector("#teams-lijst").innerHTML =
-  teams
-    .map(([logo, naam, land]) => `
+    teamsLijst.innerHTML = teams.map(team => `
       <li class="team-kaart">
-        <div class="team-logo">${logo}</div>
-        <span class="team-naam">${naam}</span>
-        <span class="team-land">${land}</span>
+        <div class="team-logo">${team[0]}</div>
+        <span class="team-naam">${team[1]}</span>
+        <span class="team-land">${team[2]}</span>
       </li>
-    `)
-    .join("");
+    `).join("");
 
+    function openWedstrijd(index, kaart) {
+      const wedstrijd = wedstrijden[index];
 
-/*
-  Wedstrijd-detailblad openen
-*/
-function toonWedstrijd(index, wedstrijdKaart) {
-  const wedstrijd = wedstrijden[index];
-
-  if (!wedstrijd) {
-    return;
-  }
-
-  const [teams, datum, tijd] = wedstrijd;
-
-  laatstGeselecteerdeKaart =
-    wedstrijdKaart;
-
-  detailTitel.textContent =
-    `Wedstrijd: ${teams}`;
-
-  detailTeams.textContent =
-    teams;
-
-  detailDatum.textContent =
-    datum;
-
-  detailTijd.textContent =
-    tijd;
-
-  detailCompetitie.textContent =
-    "Champions League";
-
-  detailStadion.textContent =
-    geenInformatie;
-
-  detailScheidsrechter.textContent =
-    geenInformatie;
-
-  detailOpstellingen.textContent =
-    geenInformatie;
-
-  detailVerslag.textContent =
-    geenInformatie;
-
-  /*
-    Verberg de normale secties
-    en toon het detailblad.
-  */
-  hoofdinhoud.classList.add(
-    "detail-modus"
-  );
-
-  wedstrijdDetail.hidden = false;
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-}
-
-
-/*
-  Wedstrijd-detailblad sluiten
-*/
-function sluitWedstrijd() {
-  wedstrijdDetail.hidden = true;
-
-  hoofdinhoud.classList.remove(
-    "detail-modus"
-  );
-
-  wedstrijdenSectie.hidden = false;
-
-  window.setTimeout(() => {
-    wedstrijdenSectie.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-
-    if (laatstGeselecteerdeKaart) {
-      laatstGeselecteerdeKaart.focus();
-    }
-  }, 50);
-}
-
-
-/*
-  Klikken op een wedstrijd
-*/
-wedstrijdenLijst.addEventListener(
-  "click",
-  event => {
-    const wedstrijdKaart =
-      event.target.closest("li");
-
-    if (!wedstrijdKaart) {
-      return;
-    }
-
-    const index =
-      Number(
-        wedstrijdKaart.dataset.wedstrijdIndex
-      );
-
-    toonWedstrijd(
-      index,
-      wedstrijdKaart
-    );
-  }
-);
-
-
-/*
-  Openen met Enter of spatiebalk
-*/
-wedstrijdenLijst.addEventListener(
-  "keydown",
-  event => {
-    const wedstrijdKaart =
-      event.target.closest("li");
-
-    if (!wedstrijdKaart) {
-      return;
-    }
-
-    if (
-      event.key === "Enter" ||
-      event.key === " "
-    ) {
-      event.preventDefault();
-
-      const index =
-        Number(
-          wedstrijdKaart.dataset.wedstrijdIndex
-        );
-
-      toonWedstrijd(
-        index,
-        wedstrijdKaart
-      );
-    }
-  }
-);
-
-
-/*
-  Terug naar komende wedstrijden
-*/
-terugKnop.addEventListener(
-  "click",
-  sluitWedstrijd
-);
-
-
-/*
-  Navigatie
-*/
-const navigatieLinks = [
-  ...document.querySelectorAll("nav a")
-];
-
-const navigatieDoelen = navigatieLinks
-  .map(link => {
-    return document.querySelector(
-      link.getAttribute("href")
-    );
-  })
-  .filter(Boolean);
-
-function absoluteTop(element) {
-  return (
-    element.getBoundingClientRect().top +
-    window.scrollY
-  );
-}
-
-function updateActieveNavigatie() {
-  const scrollPositie =
-    window.scrollY + 120;
-
-  let actiefDoel =
-    navigatieDoelen[0];
-
-  navigatieDoelen.forEach(doel => {
-    if (
-      absoluteTop(doel) <= scrollPositie
-    ) {
-      actiefDoel = doel;
-    }
-  });
-
-  navigatieLinks.forEach(link => {
-    const linkDoel =
-      document.querySelector(
-        link.getAttribute("href")
-      );
-
-    const isActief =
-      linkDoel === actiefDoel;
-
-    link.classList.toggle(
-      "active",
-      isActief
-    );
-
-    if (isActief) {
-      link.setAttribute(
-        "aria-current",
-        "location"
-      );
-    } else {
-      link.removeAttribute(
-        "aria-current"
-      );
-    }
-  });
-}
-
-
-/*
-  Navigatie blijft werken wanneer
-  het wedstrijd-detailblad open is
-*/
-navigatieLinks.forEach(link => {
-  link.addEventListener(
-    "click",
-    event => {
-      if (wedstrijdDetail.hidden) {
+      if (!wedstrijd) {
         return;
       }
 
-      event.preventDefault();
+      gekozenWedstrijd = kaart;
 
-      wedstrijdDetail.hidden = true;
+      detailTitel.textContent = wedstrijd[0];
+      detailTeams.textContent = wedstrijd[0];
+      detailDatum.textContent = wedstrijd[1];
+      detailTijd.textContent = wedstrijd[2];
 
-      hoofdinhoud.classList.remove(
-        "detail-modus"
-      );
+      main.classList.add("detail-modus");
+      detail.hidden = false;
 
-      const doel =
-        document.querySelector(
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+    function sluitWedstrijd() {
+      detail.hidden = true;
+      main.classList.remove("detail-modus");
+
+      wedstrijdSectie.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      if (gekozenWedstrijd) {
+        gekozenWedstrijd.focus();
+      }
+    }
+
+    wedstrijdLijst.addEventListener("click", function(event) {
+      const kaart = event.target.closest(".wedstrijd");
+
+      if (!kaart) {
+        return;
+      }
+
+      openWedstrijd(Number(kaart.dataset.index), kaart);
+    });
+
+    wedstrijdLijst.addEventListener("keydown", function(event) {
+      const kaart = event.target.closest(".wedstrijd");
+
+      if (!kaart) {
+        return;
+      }
+
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+
+        openWedstrijd(Number(kaart.dataset.index), kaart);
+      }
+    });
+
+    terugKnop.addEventListener("click", sluitWedstrijd);
+
+    const navigatieLinks = [
+      ...document.querySelectorAll("nav a")
+    ];
+
+    navigatieLinks.forEach(function(link) {
+      link.addEventListener("click", function(event) {
+        if (detail.hidden) {
+          return;
+        }
+
+        event.preventDefault();
+
+        detail.hidden = true;
+        main.classList.remove("detail-modus");
+
+        const doel = document.querySelector(
           link.getAttribute("href")
         );
 
-      if (doel) {
-        window.setTimeout(() => {
-          doel.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-        }, 50);
-      }
+        doel.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
 
-      updateActieveNavigatie();
+    function actieveLink() {
+      const positie = window.scrollY + 120;
+      let actief = document.querySelector("#top");
+
+      navigatieLinks.forEach(function(link) {
+        const doel = document.querySelector(
+          link.getAttribute("href")
+        );
+
+        if (doel.offsetTop <= positie) {
+          actief = doel;
+        }
+      });
+
+      navigatieLinks.forEach(function(link) {
+        const doel = document.querySelector(
+          link.getAttribute("href")
+        );
+
+        const isActief = doel === actief;
+
+        link.classList.toggle("active", isActief);
+
+        if (isActief) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
     }
-  );
-});
 
-
-/*
-  Actieve navigatie bij scrollen
-*/
-window.addEventListener(
-  "scroll",
-  updateActieveNavigatie,
-  {
-    passive: true
-  }
-);
-
-window.addEventListener(
-  "resize",
-  updateActieveNavigatie
-);
-
-window.addEventListener(
-  "load",
-  updateActieveNavigatie
-);
-</script>
+    window.addEventListener("scroll", actieveLink);
+    window.addEventListener("resize", actieveLink);
+    window.addEventListener("load", actieveLink);
+  </script>
 
 </body>
-</html>
+</html
